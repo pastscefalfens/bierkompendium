@@ -1,3 +1,3 @@
 Vorlesung Webprogrammierung
 Programmierprojekt Bierkompendium
-Gruppe Grahm, Patrick & Steffens, Pascal
+Gruppe Grahm, Patrick & Steffens, Pascal & Klausmann, Christoph
