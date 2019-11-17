@@ -1,0 +1,61 @@
+<!-- BEARBEITER: Patrick Grahm
+     Hier werden die Favorisierten Sorten des eingeloggten Users aufgelistet.-->
+
+<?php
+
+session_start();
+
+if (!isset($_SESSION['logged_in'])) {
+    header("Location: login_form.php");
+}
+
+?>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Deine Favouriten</title>
+    </head>
+    <body>
+		<a href="index.php">BIER LISTE</a>
+		<br>
+		<a href="logout.php">LOGOUT</a>
+		<br><br>
+		<a>Deine Lieblingssorten:</a>
+		<br><br>
+<?php
+
+$conn = new mysqli("10.35.46.35:3306", "k119505_admin", "TbT2c6r*XyuJv@PivUhvL.NN", "k119505_sk8ingDB");
+
+$conn->query("CREATE TABLE IF NOT EXISTS favourite (f_id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                                         u_id INT(11) NOT NULL,
+                                         b_id INT(11) NOT NULL)");
+
+$sql = "SELECT * FROM beer, favourite WHERE beer.b_id = favourite.b_id AND favourite.u_id = '". $_SESSION['u_id'] . "';";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+
+		?>
+		<a>Bier id: <?php echo $row["b_id"]; ?></a><br>
+		<a>Bezeichnung: <?php echo $row["name"]; ?></a><br>
+		<a>Sorte: <?php echo $row["variety"]; ?></a><br>
+		<a>Herkunft: <?php echo $row["origin"]; ?></a><br>
+		<a>Alkoholstärke: <?php echo $row["strength"]; ?></a><br>
+		<a>Preis: <?php echo $row["price"]; ?></a><br>
+        <?php echo '<img src="data:image/jpeg;base64,'.base64_encode( $row['image'] ).'" width=200px heigth=200px /><br>'; ?>
+		<a href="deletefavourite.php?f_id=<?php echo $row["f_id"]; ?>">Favorit entfernen</a><br>
+	<br><br>
+		<?php
+    }
+} else {
+    echo "0 results";
+}
+
+$conn->close();
+?>
+
+    </body>
+</html>

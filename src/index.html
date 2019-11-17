@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Bierkompendium - WWI18B4 - GSK</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/scrolling-nav.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">Bierkompendium</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#Sortenübersicht">Sortenübersicht</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#Sorteneditor">Sorte hinzufügen</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#Login">Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="bg-primary text-white">
+    <div class="container text-center">
+      <h1>Bierkompendium</h1>
+      <p class="lead">Eine Auswahl der besten Biere Deutschlands</p>
+    </div>
+  </header>
+
+  <section id="Sortenübersicht">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Sorten:</h2>
+          <?php
+          $conn = new mysqli("10.35.46.35:3306", "k119505_admin", "TbT2c6r*XyuJv@PivUhvL.NN", "k119505_sk8ingDB");
+
+
+          mysqli_select_db($conn, "k119505_sk8ingDB");
+          $conn->query("CREATE TABLE IF NOT EXISTS beer (b_id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                                                   name VARCHAR(255) NOT NULL,
+          										 variety VARCHAR(255) NOT NULL,
+          										 origin VARCHAR(255) NOT NULL,
+          										 strength VARCHAR(255) NOT NULL,
+                                                   price VARCHAR(255) NOT NULL,
+                                                   image MEDIUMBLOB)");
+
+          $sql = "SELECT * FROM beer";
+          $result = $conn->query($sql);
+
+          if ($result->num_rows > 0) {
+              while($row = $result->fetch_assoc()) {
+          		?>
+          		<a>Bier id: <?php echo $row["b_id"]; ?></a><br>
+          		<a>Bezeichnung: <?php echo $row["name"]; ?></a><br>
+          		<a>Sorte: <?php echo $row["variety"]; ?></a><br>
+          		<a>Herkunft: <?php echo $row["origin"]; ?></a><br>
+          		<a>Alkoholstärke: <?php echo $row["strength"]; ?></a><br>
+          		<a>Preis: <?php echo $row["price"]; ?></a><br>
+          		        <?php echo '<img src="data:image/jpeg;base64,'.base64_encode( $row['image'] ).'" width=200px heigth=200px /><br>'; ?>
+          		<a href="deletebeer.php?b_id=<?php echo $row["b_id"]; ?>">DELETE ENTRY</a><br>
+          		<a href="addfavourite.php?b_id=<?php echo $row["b_id"]; ?>">ADD AS FAVOURITE</a><br>
+          	<br><br>
+          		<?php
+              }
+          } else {
+              echo "0 results";
+          }
+
+          $conn->close();
+          ?>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="Sorteneditor" class="bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Sorte hinzufügen</h2>
+          <form action="createbeer.php" method="post" enctype="multipart/form-data">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="b_name">Name</label>
+                <input type="text" class="form-control" name="b_name" placeholder="Name">
+                <label for="b_variety">Sorte</label>
+                <input type="text" class="form-control" name="b_variety" placeholder="Sorte">
+                <label for="b_origin">Herkunftsland</label>
+                <input type="text" class="form-control" name="b_origin" placeholder="Herkunftsland">
+
+              </div>
+              <div class="form-group col-md-6">
+                <label for="b_strength">Alkoholstärke</label>
+                <input type="text" class="form-control" name="b_strength" placeholder="Alkoholstärke in pro Mille">
+                <label for="b_price">Preis</label>
+                <input type="text" class="form-control" name="b_price" placeholder="Preis in €">
+                <label for="b_img">
+             <input type="file" name="b_img" size="50" accept="png">
+                  </label>
+                </div>
+              <button type="submit" class="btn btn-primary">Hinzufügen</button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="Login">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Anmeldung:</h2>
+          <a href="login_form.php">LOGIN</a>
+          <br>
+          <a href="logout.php">LOGOUT</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Bierkompendium - WWI18B4 - GSK</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom JavaScript for this theme -->
+  <script src="js/scrolling-nav.js"></script>
+
+</body>
+
+</html>
