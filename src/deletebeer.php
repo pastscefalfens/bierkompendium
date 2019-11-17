@@ -1,5 +1,8 @@
-<!-- BEARBEITER: Christoph Klausmann
-     Der Datenbankeintrag des jeweiligen Bieres wird wieder gelöscht. -->
+<!-- BEARBEITER:    Christoph Klausmann 
+	 INFO:          Um ein Bier zu entfernen wird zunächst eine Datenbankverbindung initiiert
+					Anschließend wird per Primarykey abgeglichen, welcher Eintrag gelöscht werden soll
+					Nach erfolgreichem Löschen wird auf die Hauptseite index.php zurückgewechselt -->
+
 
 <?php
 $conn = new mysqli("10.35.46.35:3306", "k119505_admin", "TbT2c6r*XyuJv@PivUhvL.NN", "k119505_sk8ingDB");

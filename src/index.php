@@ -1,3 +1,7 @@
+<!-- BEARBEITER: Gruppe (gemeinsam)
+     INFO: Die Index.html diente der Ersterstellung der Eingabemaske für neue Biere
+           Wir arbeiten fortlaufen mit PHP/Bootstrap-->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,9 +24,7 @@
 
 <body id="page-top">
 
-  <!-- BEARBEITER: Gruppe
-       INFO: Die Index.html diente der Ersterstellung der Eingabemaske für neue Biere
-             Wir arbeiten fortlaufen mit PHP/Bootstrap-->
+
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <div class="container">
       <a class="navbar-brand js-scroll-trigger" href="#page-top">Bierkompendium</a>
@@ -159,7 +161,7 @@
   </section>
 
 
-  <!-- BEARBEITER: Gruppe
+  <!-- BEARBEITER: Gruppe (gemeinsam)
        INFO: Implementation von Bootstrap, wird benötigt um diese Funktionen und Styles verwenden zu können -->
 
   <footer class="py-5 bg-dark">

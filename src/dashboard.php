@@ -1,3 +1,10 @@
+<!-- BEARBEITER:    Gruppe (gemeinsam) 
+	 INFO:          Die Funktionen des Dashboards sind hier definiert
+					Zunächst wird geprüft, ob der Logged-In-Tag gesetzt ist, da ansonsten das Dashboard nicht angezeigt werden kann
+					Es wird eine neue Datenbankverbindung initiiert, um sich alle Elemente der Favoriten in der Nutzertabelle zu besorgen 
+					Anschließend werden die Attribute in Listenform dargestellt, so wie auch schon in der Biersortenübersicht
+					Sofern keine Favoriten existieren wird eine entsprechende Meldung angezeigt
+					Danach wird die Datenbankverbindung wieder geschlossen -->
 <?php
 
 session_start();

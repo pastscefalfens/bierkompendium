@@ -1,4 +1,4 @@
-/* BEARBEITER:  Patrick Grahm
+/* BEARBEITER:  Patrick Grahm & Pascal Steffens
    INFO:        Zugehörig zu Login und Register Form
                 Es soll zwischen den Login- und Register-Tabs gewechselt werden können
                 Sofern man auf dem Aktiven Tab ist und auf die andere Seite wechseln möchte sollen alle aktiven Klassen "versteckt" werden

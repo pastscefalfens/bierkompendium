@@ -1,3 +1,6 @@
+<!-- BEARBEITER: Gruppe (gemeinsam)
+     INFO: Loginformular -->
+
 <?php
 
 session_start();

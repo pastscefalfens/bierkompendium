@@ -1,3 +1,9 @@
+<!-- BEARBEITER:    Patrick Grahm
+	 INFO:          Um ein Bier aus den Favoriuten zu entfernen wird zunächst eine Datenbankverbindung initiiert
+					Anschließend wird per Primarykey abgeglichen, welcher Eintrag gelöscht werden soll
+					Nach erfolgreichem Löschen wird auf das Dashboard zurückgewechselt -->
+
+
 <?php
 
 session_start();
